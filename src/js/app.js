@@ -35,7 +35,6 @@ $(document).ready(function () {
         let codeToParse = $('#codePlaceholder').val();
         let params = $('#paramsPlaceHolder').val();
         let parsedCode = parseCode(codeToParse,params);
-        console.log(JSON.stringify(parsedCode,null,2));
         $('#cfg').text('');
         flowchart.parse(parsedCode).drawSVG('diagram',settings);
     });

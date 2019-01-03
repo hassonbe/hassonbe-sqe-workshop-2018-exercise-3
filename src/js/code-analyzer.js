@@ -117,7 +117,6 @@ function parseExprStatement(expr) {
 }
 function parseVarDeclarator(expr) {
     let value = expr.init == null||undefined ?'': parseExpr(expr.init);
-    console.log(value);
     if(value !== ''){
         let left =  expr.id.name;
         if (currentStateType ==='op'){
@@ -316,6 +315,13 @@ function changeFeas(lastFeas,testRes){
     }
 
 }
+
+function checkIffinished(lastFeas) {
+    if(!finished){
+        feasible=lastFeas;
+    }
+}
+
 function parseIfExp(expr,isAlternate) {
     let savedDict =new Map(dict);
     let result=closeOp();
@@ -333,10 +339,7 @@ function parseIfExp(expr,isAlternate) {
     let alternate =getAlternate(expr.alternate,savedDict,isAlternate,stateNum);
     result = result+consequent+endOp()+alternate;
     currentStateType='';
-    console.log(finished);
-    if(!finished){
-        feasible=lastFeas;
-    }
+    checkIffinished(lastFeas);
     return result;
 }
 function makeNode(name,type,value){
